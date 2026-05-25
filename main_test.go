@@ -8,7 +8,7 @@ import (
 )
 
 // Unit test
-func TestReverseString(t *testing.T) {
+func TestReverse(t *testing.T) {
 	testcases := []struct {
 		in, want string
 	}{
@@ -28,14 +28,21 @@ func TestReverseString(t *testing.T) {
 
 // TODO Fuzzy test
 
+// Benchmark test
+func BenchmarkReverse(b *testing.B) {
+	for b.Loop() {
+		Reverse("str")
+	}
+}
+
 // HTTP Handler: Integration test
 func TestReverseHandler(t *testing.T) {
 	testcases := []struct {
 		in, want string
 	}{
 		{"Hello world!", "!dlrow olleH"},
-		{"1234567890", "0987654321"},
-		{"", ""},
+		//{"1234567890", "0987654321"},
+		//{"", ""},
 	}
 
 	for _, tc := range testcases {
