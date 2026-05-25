@@ -5,6 +5,8 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+
+	"github.com/jomoespe/go-testing/pkg/stringutils"
 )
 
 func main() {
@@ -24,7 +26,7 @@ func reverseHandler(w http.ResponseWriter, r *http.Request) {
 	if q == "" {
 		q = "Hello world!"
 	}
-	rev, err := Reverse(q)
+	rev, err := stringutils.Reverse(q)
 	if err != nil {
 		fmt.Fprint(w, "") // TODO send error
 	}

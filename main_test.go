@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-// HTTP Handler: Integration test
+// Integration test (HTTP Handler)
 
 func TestReverseHandler(t *testing.T) {
 	testcases := []struct {
