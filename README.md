@@ -41,6 +41,10 @@ La primera columna es el número de iteraciones (74837330). La segunda es el tie
 
 ### Fuzzy
 
+```bash
+go test -fuzz=Fuzz -fuzztime 30s
+```
+
 ## See also
 
 - [Benchmark Testing in Go: A Practical Guide](https://medium.com/@debug-ing/benchmark-testing-in-go-a-practical-guide-2900e008ce43)

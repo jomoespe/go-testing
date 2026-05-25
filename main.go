@@ -1,10 +1,12 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
+	"unicode/utf8"
 )
 
 func main() {
@@ -24,13 +26,20 @@ func reverseHandler(w http.ResponseWriter, r *http.Request) {
 	if q == "" {
 		q = "Hello world!"
 	}
-	fmt.Fprint(w, Reverse(q))
+	rev, err := Reverse(q)
+	if err != nil {
+		fmt.Fprint(w, "") // TODO send error
+	}
+	fmt.Fprint(w, rev)
 }
 
-func Reverse(s string) string {
-	b := []byte(s)
+func Reverse(s string) (string, error) {
+	if !utf8.ValidString(s) {
+		return s, errors.New("input is not valid UTF-8")
+	}
+	b := []rune(s)
 	for i, j := 0, len(b)-1; i < len(b)/2; i, j = i+1, j-1 {
 		b[i], b[j] = b[j], b[i]
 	}
-	return string(b)
+	return string(b), nil
 }
