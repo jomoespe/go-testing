@@ -1,50 +1,65 @@
-# Go testing
+# Go Testing
 
-Projecto simple con ejemplos de como hacer testing en Go.
+Here is a guide and a simple project structure to help you understand how testing works in Go.
 
-## Descripción
 
-El proyecto consiste en un API REST `/reverse[?q=STRING]`, que devuelve la cadena que se pase en el parámetro `q` invertido. Si no se pasa parámetro devuelve la cadema **Hola Mundo!** dada la vuelta.
+> TODO add [vulnerabilities checking](https://go.dev/doc/tutorial/govulncheck)
+
+## Project description and structure
+
+The project is a simple `/reverse[?q=STRING]` REST API, that returns reverse `q` parameter, or reverse **Hello world!** string by default.
 
 ## Testing
 
-Se hacen varios tipos de test:
+This tests are done:
 
-- Unitarios
-- Integración
-- Rendimiento(_benchmarking_)
+- Unit
+- Integration [PENDING]
+- Performance (_benchmarking_)
 - Fuzzy
 
-### Unitarios
+### Unit tests
 
-```
+> TBD describe
+
+```bash
 go test ./...
 ```
 
-### Integración
+### Integration tests
 
-### Rendimiento
+> TBD describe
+
+### Performance
+
+> TBD describe
 
 ```bash
-$ go test -bench=. -benchmem
+$ go test ./... -bench=. -benchmem
 
+PASS
+ok  	github.com/jomoespe/go-testing	0.005s
 goos: linux
 goarch: amd64
-pkg: github.com/jomoespe/go-testing
+pkg: github.com/jomoespe/go-testing/pkg/stringutils
 cpu: AMD Ryzen 7 4800H with Radeon Graphics         
-BenchmarkReverse-16    	74837330	        16.00 ns/op	       0 B/op	       0 allocs/op
+BenchmarkReverse-16    	19578816	        71.43 ns/op	       8 B/op	       1 allocs/op
 PASS
-ok  	github.com/jomoespe/go-testing	1.209s
+ok  	github.com/jomoespe/go-testing/pkg/stringutils	1.408s
 ```
 
-La primera columna es el número de iteraciones (74837330). La segunda es el tiempo promedio de ejecución (16.00 ns/op) en manosegundos. La tercera (0 B/op) es el numero de bytes alocados por operación.
+First column is the number of iteratons, 19578816 in this case. Second column is the average execution time in nanos, 71.43 ns/op in this case. Third column is the number of alocated bytes by iteration, 8 B/op in this case. Last fourth column is the number of allocations done by iterations, 1 alloc/op in this case.
 
 ### Fuzzy
 
+> TBD describe
+
 ```bash
-go test -fuzz=Fuzz -fuzztime 30s
+go test ~/pkg/stringutils -fuzz=Fuzz -fuzztime 30s
 ```
 
 ## See also
 
 - [Benchmark Testing in Go: A Practical Guide](https://medium.com/@debug-ing/benchmark-testing-in-go-a-practical-guide-2900e008ce43)
+- [Tutorial: Getting started with fuzzing](https://go.dev/doc/tutorial/fuzz)
+- [Coverage profiling support for integration tests](https://go.dev/doc/build-cover#glos-integration-test)
