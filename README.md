@@ -58,6 +58,24 @@ First column is the number of iteratons, 19578816 in this case. Second column is
 go test ~/pkg/stringutils -fuzz=Fuzz -fuzztime 30s
 ```
 
+## Building
+
+Build static stripped binary:
+
+```bash
+CGO_ENABLED=0 go build -ldflags="-s -w"
+```
+
+To check, with the compiled binary:
+
+```bash
+file go-testing
+# should say something like: ... statically linke ... stripped 
+
+ldd go-testing
+# should say something like: ... not a dynamic executable
+```
+
 ## See also
 
 - [Benchmark Testing in Go: A Practical Guide](https://medium.com/@debug-ing/benchmark-testing-in-go-a-practical-guide-2900e008ce43)
