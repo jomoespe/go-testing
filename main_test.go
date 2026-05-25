@@ -4,6 +4,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"testing"
 )
 
@@ -38,15 +39,15 @@ func BenchmarkReverse(b *testing.B) {
 // HTTP Handler: Integration test
 func TestReverseHandler(t *testing.T) {
 	testcases := []struct {
-		in, want string
+		str, want string
 	}{
+		{"", "!dlrow olleH"},
 		{"Hello world!", "!dlrow olleH"},
-		//{"1234567890", "0987654321"},
-		//{"", ""},
+		{"1234567890", "0987654321"},
 	}
 
 	for _, tc := range testcases {
-		r := httptest.NewRequest(http.MethodGet, "/reverse", nil)
+		r := httptest.NewRequest(http.MethodGet, "/reverse?q="+url.QueryEscape(tc.str), nil)
 		w := httptest.NewRecorder()
 
 		reverseHandler(w, r)

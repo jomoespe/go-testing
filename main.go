@@ -20,7 +20,11 @@ func main() {
 }
 
 func reverseHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, Reverse("Hello world!"))
+	q := r.URL.Query().Get("q")
+	if q == "" {
+		q = "Hello world!"
+	}
+	fmt.Fprint(w, Reverse(q))
 }
 
 func Reverse(s string) string {
@@ -28,6 +32,5 @@ func Reverse(s string) string {
 	for i, j := 0, len(b)-1; i < len(b)/2; i, j = i+1, j-1 {
 		b[i], b[j] = b[j], b[i]
 	}
-
 	return string(b)
 }
