@@ -1,1 +1,5 @@
+# Fuzzy test data
 testdata/
+
+# Binarioes and generated artifacts
+go-testing
